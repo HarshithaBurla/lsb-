@@ -248,7 +248,7 @@ class SimCLRAEModule(nn.Module):
                 cooldown=cooldown,
                 min_lr=min_lr,
                 eps=eps,
-                verbose=False,
+                
             )
 
     def set_normalization(self, reference_weights, index_dict):

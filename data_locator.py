@@ -2,7 +2,8 @@ import os, sys
 import torch
 import numpy as np
 from stego import float_to_binary
-
+import pathlib
+pathlib.PosixPath = pathlib.WindowsPath
 from embedding import embed_s, binzoo_to_floatzoo
 
 
@@ -58,13 +59,13 @@ def get_zoo_weights_bin_path(zoo_name='mnist'):
     return os.path.join(zoo_dir_path, 'zoo_weights_bin.npz')
 
 def get_embedded_weights_path(zoo_name='mnist', malware_name='malware_2448b', fill=True, msb=False):
-    return os.path.join('data', 'embedded', f'zoo:{zoo_name}_malwarename:{malware_name}_fill:{fill}_msb:{msb}.npz')
+    return os.path.join('data', 'embedded', f'zoo_{zoo_name}_malwarename_{malware_name}_fill_{fill}_msb_{msb}.npz')
 
 def get_grads_path(zoo_name='mnist', malware_name='malware_2448b', fill=True, msb=False):
-    return os.path.join('data', 'features', 'grads', f'zoo:{zoo_name}_malwarename:{malware_name}_fill:{fill}_msb:{msb}.npz')
+    return os.path.join('data', 'features', 'grads', f'zoo_{zoo_name}_malwarename_{malware_name}_fill_{fill}_msb_{msb}.npz')
 
 def get_losses_path(zoo_name='mnist', malware_name='malware_2448b', fill=True, msb=False):
-    return os.path.join('data', 'features', 'losses', f'zoo:{zoo_name}_malwarename:{malware_name}_fill:{fill}_msb:{msb}.npz')
+    return os.path.join('data', 'features', 'losses', f'zoo_{zoo_name}_malwarename_{malware_name}_fill_{fill}_msb_{msb}.npz')
 
 @log_it
 def create_zoo_weights(zoo_name='mnist'):
@@ -75,7 +76,7 @@ def create_zoo_weights(zoo_name='mnist'):
     save_path = get_zoo_weights_path(zoo_name)
     dataset_path = os.path.join(zoo_dir_path, 'dataset.pt')
 
-    dataset = torch.load(dataset_path)
+    dataset = torch.load(dataset_path, weights_only=False)
 
     trainset = dataset['trainset'].__get_weights__()
     testset = dataset['testset'].__get_weights__()

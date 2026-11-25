@@ -134,7 +134,7 @@ def create_losses_dataset(zoo_name='mnist', malware_name = 'malware_12584bytes',
 
     # load dataset
     dataset_path = os.path.join(PATH_ROOT,'dataset.pt')
-    dataset = torch.load(dataset_path)
+    dataset = torch.load(dataset_path, weights_only=False)
 
     index_dict = config["model::index_dict"]
     loss_recon_layer = LayerWiseReconLoss(

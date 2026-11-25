@@ -1,0 +1,9 @@
+﻿venv/
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+data/model_zoos/
+data/embedded/
+data/mnist_original/
+data/features/
